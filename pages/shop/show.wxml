@@ -24,7 +24,7 @@
           </view>
         </view>
       </view>
-      <view wx:if="{{info.promotion && info.promotion.length > 0}}" class="promotion">
+      <!-- <view wx:if="{{info.promotion && info.promotion.length > 0}}" class="promotion">
         <swiper class="promotion-swiper" vertical="true" autoplay="true" interval="5000">
           <swiper-item wx:key="index" wx:for="{{info.promotion}}" class="promotion-item">
             <image class="promotion-item__icon" src="{{item.pic_url}}"></image>
@@ -34,7 +34,7 @@
         <view class="promotion-total">
           {{info.promotion.length}}个活动
         </view>
-      </view>
+      </view> -->
     </view>
   </view>
   <view class="shop-content">

@@ -22,7 +22,7 @@ var initOrder = {
 
 Page({
   data: {
-    tabs: ["商品", "评价", "商家"],
+    tabs: ["商品", "商家"],
     activeIndex: 0,
 
     activeMenuIndex: 0,
@@ -37,6 +37,21 @@ Page({
       loading: false,
       page: 0,
     },
+
+    info:{is_rest: 0, 
+      pic_url:"../../images/logo.png", 
+      seller_name: "晓文食堂", 
+      over_all: 0.0, 
+      sales:98, 
+      min_price: 10, 
+      reach_time:40,
+      menus: [{
+        eleme_category_id: "0",
+        goods: "705207,705209,705212,705215,705216,705217,705218,705219,705220,705297,705309,733712,733720,733769",
+        goods: [{
+          compulsory_goods: "0"
+        }]
+      }]}
 
 
   },

@@ -13,20 +13,14 @@
     "pages/index/search",
     "pages/index/category",
     "pages/address/list",
-    "pages/index/address",
     "pages/address/add",
     "pages/login/login"
   ],
-  "permission": {
-    "scope.userLocation": {
-      "desc": "你的位置信息将用于定位您所在的地区"
-    }
-  },
   "window": {
     "backgroundColor": "#f8f8f8",
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#ff5801",
-    "navigationBarTitleText": "爱跑腿外卖",
+    "navigationBarTitleText": "晓文校园帮",
     "navigationBarTextStyle": "white"
   },
   "tabBar": {

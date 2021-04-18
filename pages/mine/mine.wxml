@@ -22,17 +22,23 @@
   </navigator>
 </view>
 <view class="weui-cells">
-  <view data-phone="400-926-2108" bindtap="onPhoneTap" class="weui-cell weui-cell_access">
+  <view data-phone="175-0900-1705" bindtap="onPhoneTap" class="weui-cell weui-cell_access">
     <view class="weui-cell__bd">客服热线</view>
-    <view class="weui-cell__ft weui-cell__ft_in-access">400-926-2108</view>
+    <view class="weui-cell__ft weui-cell__ft_in-access">175-0900-1705</view>
   </view>
 </view>
 
 <view class="button-sp-area">
-  <button loading="{{loading}}" bindtap="onLogout" wx:if="{{loginInfo}}"  class="weui-btn weui-btn_plain" >
+  <button loading="{{loading}}" bindtap="onExit" wx:if="{{loginInfo}}"  class="weui-btn weui-btn_plain" >
     退出账号
   </button>
-  <navigator url="/pages/login/login?callback=callback" wx:else class="weui-btn weui-btn_primary" hover-class="button-hover">
+  <button bindtap="getUserProfile" wx:else class="weui-btn weui-btn_primary" hover-class="button-hover">
     立即登录
-  </navigator>
+  </button>
+  <!-- <button loading="{{loading}}" bindtap="onLogout" wx:if="{{loginInfo}}"  class="weui-btn weui-btn_plain" >
+    退出账号
+  </button>
+  <navigator bindtap="getUserProfile" url="/pages/login/login?callback=callback" wx:else class="weui-btn weui-btn_primary" hover-class="button-hover">
+    立即登录
+  </navigator> -->
 </view>

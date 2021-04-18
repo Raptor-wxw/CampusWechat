@@ -3,9 +3,15 @@
 
 <!--index.wxml-->
 <view class="topbar">
-  <navigator url="./address?callback=callback" class="address trangle">
-    <image class="address__icon" src="/images/location.png"></image>{{currentAddress ? currentAddress.title : '定位中...'}}
-  </navigator>
+  <!-- <navigator wx:if="{{!hasUserInfo}}" url="../login/login" bindtap="getUserProfile" class="address trangle">
+    <image class="address__icon" src="/images/location.png"></image>{{currentAddress ? currentAddress.title : '请登录'}}
+  </navigator> -->
+  <view wx:if="{{!hasUserInfo}}" bindtap="getUserProfile" class="address trangle">
+    <image class="address__icon" src="/images/location.png"></image>{{currentAddress ? currentAddress.title : '请登录'}}
+  </view>
+  <view wx:else class="address">
+    <image class="address__icon" src="/images/location.png"></image>{{school}}
+  </view>
   <navigator url="./search" class="search">
     <icon type="search" size="20" /> 搜索
   </navigator>

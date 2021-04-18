@@ -4,62 +4,94 @@ import { logout } from '../../utils/apis'
 
 const app = getApp()
 Page({
-  data:{},
+  data:{
+    userInfo: {},
+    loginInfo: false
+  },
+
   onLoad:function(options){
-    // 页面初始化 options为页面跳转所带来的参数
-    var that = this
-    getUserInfo(userInfo => {
+    if(!this.data.hasUserInfo){
       this.setData({
-        userInfo
+        userInfo: app.globalData.userInfo,
+        loginInfo: app.globalData.hasUserInfo
       })
-    })
-  },
-  onReady:function(){
-    // 页面渲染完成
-  },
-  // onShow:function(){
-  //   // 页面显示
-  //   var that = this
-  //   app.getLoginInfo(loginInfo => {
-  //     that.setData({
-  //       loginInfo: loginInfo.user_info
-  //     })
-  //   })
-  // },
-  onHide:function(){
-    // 页面隐藏
-  },
-  onUnload:function(){
-    // 页面关闭
-  },
-  onPhoneTap(e) {
-    makePhoneCall(e.currentTarget.dataset.phone)
-  },
-  onLogout(e) {
-    var that = this
-    var {loginInfo: {phone}, loading} = this.data
-    if(loading) {
-      return
     }
-    this.setData({
-      loading: true
-    })
-    logout({
-      phone,
-      success(data) {
-        app.setLoginInfo(data)
-        that.setData({
-          loginInfo: null,
-          loading: false
+    console.log(this.data.loginInfo)
+  },
+
+  getUserProfile(e) {
+    wx.getUserProfile({
+      desc: '用于完善会员资料',
+      success: (res) => {
+        getApp().globalData.userInfo = res.userInfo
+        getApp().globalData.hasUserInfo = true
+        this.setData({
+          userInfo: res.userInfo,
+          loginInfo: true
         })
       }
     })
   },
-  callback(loginInfo) {
+
+  onExit(e){
     this.setData({
-      loginInfo: loginInfo.user_info
+      loginInfo: false,
+      userInfo: null
     })
+    getApp().globalData.userInfo = null
+    getApp().globalData.hasUserInfo = false
   },
+
+  onReady:function(){
+    // 页面渲染完成
+  },
+
+  onShow:function(){
+    this.setData({
+      userInfo: app.globalData.userInfo,
+      loginInfo: app.globalData.hasUserInfo
+    })
+    console.log(this.data.userInfo)
+  },
+
+  onHide:function(){
+    // 页面隐藏
+  },
+
+  onUnload:function(){
+    // 页面关闭
+  },
+
+  onPhoneTap(e) {
+    makePhoneCall(e.currentTarget.dataset.phone)
+  },
+
+  // onLogout(e) {
+  //   var that = this
+  //   var {loginInfo: {phone}, loading} = this.data
+  //   if(loading) {
+  //     return
+  //   }
+  //   this.setData({
+  //     loading: true
+  //   })
+  //   logout({
+  //     phone,
+  //     success(data) {
+  //       app.setLoginInfo(data)
+  //       that.setData({
+  //         loginInfo: null,
+  //         loading: false
+  //       })
+  //     }
+  //   })
+  // },
+  // callback(loginInfo) {
+  //   this.setData({
+  //     loginInfo: loginInfo.user_info
+  //   })
+  // },
+
   onShareAppMessage() {
     return {
       title: '我的信息',

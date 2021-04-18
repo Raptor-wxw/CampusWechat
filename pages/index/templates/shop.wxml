@@ -50,7 +50,7 @@
           <view class="shop__fee weui-flex__item">
             起送 ¥{{min_price}}
           </view>
-          <text class="shop__reach-time grey-color">{{distanceFormat}}km</text> |
+          <text class="shop__reach-time grey-color">平均送达时间</text> |
           <text class="shop__reach-time primary-color">{{reach_time}}分钟</text>
         </view>
       </view>
