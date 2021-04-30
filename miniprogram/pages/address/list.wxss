@@ -1,2 +1,7 @@
 /* pages/address/list.wxss */
 @import 'select.wxss';
+
+.address {
+    width: 280px;
+    display: inline-block;
+}

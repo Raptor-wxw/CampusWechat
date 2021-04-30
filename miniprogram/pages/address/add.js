@@ -1,12 +1,10 @@
 // pages/address/add.js
 import WxValidate from '../../utils/WxValidate'
+// import {
+//   addUserAddr, getUserAddr
+// } from '../../utils/apis'
 import {
-  addUserAddr, getUserAddr
-} from '../../utils/apis'
-import {
-  alert,
-  getCurrentAddress, reverseGeocoder,
-  getPrevPage
+  alert
 } from '../../utils/util'
 Page({
   data: {
@@ -27,13 +25,13 @@ Page({
     // } else {
     //   this.initAddress()
     // }
-    this.initValidate()
+    // this.initValidate()
   },
   onReady: function () {
     // 页面渲染完成
   },
   onShow: function () {
-	  console.log(this.data.receiver)
+    console.log(this.data)
     // 页面显示
   },
   onHide: function () {
@@ -42,20 +40,21 @@ Page({
   onUnload: function () {
     // 页面关闭
   },
-  send(){
-    alert("test");
+  test: function(){
+    console.log(this.data)
   },
   formSubmit: function(e) {
     var that = this
     this.setData({
       receiver: e.detail.value.receiver,
       phone: e.detail.value.phone,
-      place: e.detail.value.place,
+      address: e.detail.value.address,
       dormitory: e.detail.value.dormitory
     })
 
+    this.test()
 
-    if (!this.data.receiver || !this.data.phone || !this.data.place || !this.data.dormitory) {
+    if (!this.data.receiver || !this.data.phone || !this.data.address || !this.data.dormitory) {
       return alert('请填写完整')
     }
 
@@ -77,18 +76,15 @@ Page({
  
     })
 
+    console.log(this.data)
     //将数传回给addressList
     setTimeout(function(){
       wx.navigateTo({
-        url: './list',
-        success: function(res) {
-          res.eventChannel.emit('acceptDataFromOpenerPage', {
-            receiver: this.data.receiver, 
-            phone: this.data.phone, 
-            place: this.data.place, 
-            dormitory: this.data.dormitory})
-        }
-      })
+        url: './list?dataObj='+JSON.stringify({
+            receiver: that.data.receiver, 
+            phone: that.data.phone, 
+            address: that.data.address, 
+            dormitory: that.data.dormitory})})
     }, 1000)
   }
 })
