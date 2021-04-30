@@ -1,12 +1,12 @@
-# 云开发 quickstart
+# CampusWechat
+**校园跑腿微信小程序，全国微信小程序开发大赛参赛作品**
+------
+### 开发版
+目前还未完成开发，可以点个star支持一下，fork项目关注最新进展
+欢迎关注微信公众号“夜寒信息”一起交流学习
 
-这是云开发的快速启动指引，其中演示了如何上手使用云开发的三大基础能力：
-
-- 数据库：一个既可在小程序前端操作，也能在云函数中读写的 JSON 文档型数据库
-- 文件存储：在小程序前端直接上传/下载云端文件，在云开发控制台可视化管理
-- 云函数：在云端运行的代码，微信私有协议天然鉴权，开发者只需编写业务逻辑代码
-
-## 参考文档
-
-- [云开发文档](https://developers.weixin.qq.com/miniprogram/dev/wxcloud/basis/getting-started.html)
-
+------
+### 开发人员（两位）：
+wxw：https://github.com/Raptor-wxw
+wxw：https://gitee.com/wang_xiaowen
+cfh：
