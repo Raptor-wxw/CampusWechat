@@ -1,0 +1,1 @@
+"E:\微信web开发者工具\cli.bat" cloud functions deploy --e wxw-9gxxtesw2e0f452a --n functions --r  --project D:\WeChatProjects\TestCloud
