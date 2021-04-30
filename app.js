@@ -32,7 +32,7 @@ App({
         // })
       }
     })
-	wx.addCard()
+	wxw.test2();
     return this.globalData.userInfo
   },
   onLaunch: function () {
