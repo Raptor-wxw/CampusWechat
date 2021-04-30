@@ -21,8 +21,8 @@
       <view class="weui-cell__hd">
         <view class="weui-label">收货地址</view>
       </view>
-      <view class="weui-cell__bd weui-cell__ft_in-access">
-        {{address.title}}
+      <view class="weui-cell__bd">
+        <input name="place" value="{{place}}" class="weui-input" placeholder="请输入宿舍楼或寄存地址" />
       </view>
     </view>
     <view class="weui-cell weui-cell_input">
@@ -30,7 +30,7 @@
         <view class="weui-label">门牌号</view>
       </view>
       <view class="weui-cell__bd">
-        <input name="detail" value="{{detail}}" class="weui-input" placeholder="请输入门牌号等详细信息" />
+        <input name="dormitory" value="{{dormitory}}" class="weui-input" placeholder="请输入门牌号等详细信息" />
       </view>
     </view>
   </view>

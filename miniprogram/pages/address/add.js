@@ -10,22 +10,30 @@ import {
 } from '../../utils/util'
 Page({
   data: {
+    hasData: false,
+    changeDatabase: false,
+    receiver: null,       //收货人
+    phone: null,          //电话
+    palce: null,          //地址
+    dormitory: null,      //宿舍号
   },
   onLoad: function (options) {
     // 页面初始化 options为页面跳转所带来的参数
-    this.id = options.id
-    this.callback = options.callback || 'callback'
+    // this.id = options.id
+    // this.callback = options.callback || 'callback'
+    // this.initValidate()
+    // if (this.id) {
+    //   this.loadData()
+    // } else {
+    //   this.initAddress()
+    // }
     this.initValidate()
-    if (this.id) {
-      this.loadData()
-    } else {
-      this.initAddress()
-    }
   },
   onReady: function () {
     // 页面渲染完成
   },
   onShow: function () {
+	  console.log(this.data.receiver)
     // 页面显示
   },
   onHide: function () {
@@ -34,125 +42,53 @@ Page({
   onUnload: function () {
     // 页面关闭
   },
-  initValidate() {
-    this.validate = new WxValidate({
-      receiver: {
-        required: true,
-      },
-      phone: {
-        required: true,
-        tel: true,
-      },
-    }, {
-        receiver: {
-          required: '请输入您的姓名'
-        },
-        phone: {
-          required: '请输入手机号',
-          tel: '请输入有效手机号码'
-        },
-      })
+  send(){
+    alert("test");
   },
-  initAddress() {
+  formSubmit: function(e) {
     var that = this
-    getCurrentAddress(address => {
-      that.setData({
-        address
-      })
-    })
-  },
-  onChooseLocation(e) {
-    var that = this
-    that.setData({
-      disabled: true
-    })
-    wx.chooseLocation({
-      success: function (res) {
-        var {
-          name: title, address,
-          longitude, latitude
-        } = res
-        var location = {
-          longitude, latitude
-        }
-        reverseGeocoder({
-          location,
-          success(data) {
-            that.setData({
-              address: Object.assign({
-                title, address, location
-              }, data),
-              disabled: false,
-            })
-          }
-        })
-      },
-    })
-  },
-  loadData() {
-    var that = this
-    var addr_id = this.id
-    wx.showNavigationBarLoading()
-    getUserAddr({
-      addr_id,
-      success(data) {
-        that.setData({
-          receiver: data.receiver,
-          phone: data.phone,
-          detail: data.detail,
-          address: {
-            title: data.addr,
-            city: data.city_name,
-            district: data.district_name,
-            city_id: data.city_id,
-            district_id: data.district_id,
-            gps: `${data.longitude},${data.latitude}`
-          }
-        })
-        wx.hideNavigationBarLoading()
-      },
-      error() {
-        wx.hideNavigationBarLoading()
-      }
-    })
-  },
-  formSubmit(e) {
-    var that = this
-    var {loading, address} = this.data
-    if (loading) {
-      return
-    }
-
-    if (!address) {
-      return alert('请选择收货地址')
-    }
-
-    if (!this.validate.checkForm(e)) {
-      const error = this.validate.errorList[0]
-      return alert(error.msg)
-    }
     this.setData({
-      loading: true
+      receiver: e.detail.value.receiver,
+      phone: e.detail.value.phone,
+      place: e.detail.value.place,
+      dormitory: e.detail.value.dormitory
     })
-    var {
-      receiver, phone, detail
-    } = e.detail.value
-    addUserAddr({
-      receiver, phone, detail,
-      address,
-      addr_id: that.id,
-      success(data) {
-        that.setData({
-          loading: false
-        })
-        getPrevPage()[that.callback]()
-        wx.navigateBack()
-      },
-      error() {
-        that.setData({
-          loading: false
-        })
-      }
+
+
+    if (!this.data.receiver || !this.data.phone || !this.data.place || !this.data.dormitory) {
+      return alert('请填写完整')
+    }
+
+    // if (!this.validate.checkForm(e)) {
+    //   const error = this.validate.errorList[0]
+    //   return alert(error.msg)
+    // }
+
+    //将收货信息填入云端数据库
+    //若成功填入则将“已填入数据库”改为true
+    // this.setData({
+    //   changeDatabase: true
+    // })
+
+    wx.showToast({
+      title: '修改成功',
+      icon: 'success',
+      duration: 2000//持续的时间
+ 
     })
-  },
+
+    //将数传回给addressList
+    setTimeout(function(){
+      wx.navigateTo({
+        url: './list',
+        success: function(res) {
+          res.eventChannel.emit('acceptDataFromOpenerPage', {
+            receiver: this.data.receiver, 
+            phone: this.data.phone, 
+            place: this.data.place, 
+            dormitory: this.data.dormitory})
+        }
+      })
+    }, 1000)
+  }
 })

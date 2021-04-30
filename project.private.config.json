@@ -57,6 +57,13 @@
         {
           "name": "pages/updateRecordSuccess/index",
           "pathName": "pages/updateRecordSuccess/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/address/list",
+          "pathName": "pages/address/list",
+          "query": "",
           "scene": null
         }
       ]
