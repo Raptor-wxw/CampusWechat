@@ -16,7 +16,35 @@ Page({
         loginInfo: app.globalData.hasUserInfo
       })
     }
-    console.log(this.data.loginInfo)
+  },
+
+  getOpenId() {
+    wx.showLoading({
+      title: '',
+    })
+   wx.cloud.callFunction({
+      name: 'functions',
+      config: {
+        env: this.data.envId
+      },
+      data: {
+        type: 'getOpenId'
+      }
+    }).then((resp) => {
+      this.setData({
+        haveGetOpenId: true,
+        openId: resp.result.openid
+      })
+      getApp().globalData.haveGetOpenId = true
+      getApp().globalData.openId = this.data.openId
+    }).catch((e) => {
+      this.setData({
+        showUploadTip: true
+      })
+    }).finally(() => {
+      wx.hideLoading()
+      console.log(app.globalData.openId)
+    })
   },
 
   getUserProfile(e) {
@@ -29,6 +57,8 @@ Page({
           userInfo: res.userInfo,
           loginInfo: true
         })
+        this.getOpenId()
+        console.log(res.userInfo)
       }
     })
   },
@@ -51,7 +81,6 @@ Page({
       userInfo: app.globalData.userInfo,
       loginInfo: app.globalData.hasUserInfo
     })
-    console.log(this.data.userInfo)
   },
 
   onHide:function(){
