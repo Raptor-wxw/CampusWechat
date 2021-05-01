@@ -13,7 +13,7 @@ App({
         traceUser: true,
       })
     }
-杀射手
+
     this.globalData = {}
   }
 })
